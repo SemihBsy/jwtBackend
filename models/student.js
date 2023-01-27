@@ -5,7 +5,9 @@ import mongoose from "../connection/connection.js";
 const { Schema, model } = mongoose;
 
 // Student Schema
-const studentSchema = new Schema({
+const studentSchema = new Schema(
+  {
+    username: { type: String, required: true },
     name: String,
     gender: String,
     enrollment: Number,
@@ -14,10 +16,11 @@ const studentSchema = new Schema({
     linkedin: String,
     gpa: Number,
     absences: String,
-
-}, {timestamps: true})
+  },
+  { timestamps: true }
+);
 
 // Student model
-const Student = model("Student", studentSchema)
+const Student = model("Student", studentSchema);
 
 export default Student;
