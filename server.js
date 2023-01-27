@@ -1,15 +1,14 @@
 // Import dependencies
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
 import dotenv from "dotenv";
-import router from "./controllers/student.js";
-
-// Get env variables
 dotenv.config();
-
-// Create express app
+import express from "express";
 const app = express();
+import cors from "cors";
+import morgan from "morgan";
+import router from "./controllers/student.js";
+import mongoose from "./connection/connection.js";
+import AuthRouter from "./controllers/user.js"
+
 
 // Register middleware
 app.use(cors());
@@ -22,8 +21,9 @@ app.get("/", (req, res) => {
 })
 
 // Router
+app.use("/auth", AuthRouter);
 app.use("/student", router);
 
 // Listener
-const PORT = process.env.PORT ?? 4001;
+const PORT = process.env.PORT ?? 4000;
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
